@@ -8,10 +8,7 @@ RSpec.describe User, type: :model do
     it "can create many events" do
       first = user.events.create(creator: user, location: "The restaurant at the end of the universe", date: Date.today)
       second = user.events.create(creator: user, location: "My place", date: Date.today)
-      expect(first.nil?).to be false
-      expect(second.nil?).to be false
-      expect(first.creator).to eq(user)
-      expect(second.creator).to eq(user)
+      expect(user.events.length).to be 2
     end
 
     xit "can attend many events" do
