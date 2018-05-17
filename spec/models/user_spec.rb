@@ -2,7 +2,15 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
+  NUMBER_OF_EVENTS = 2
+
   let(:user) {FactoryBot.create(:user)}
+  let(:events) do
+    e = Array.new
+    NUMBER_OF_EVENTS.times do
+      e.push(FactoryBot.create(:event))
+    end
+  end
 
   describe "Associations" do
     it "can create many events" do
@@ -13,6 +21,9 @@ RSpec.describe User, type: :model do
 
     xit "can attend many events" do
       pending "How do I even?"
+      events.each do |event|
+        event.attendee.create()
+      end
     end
   end
 
