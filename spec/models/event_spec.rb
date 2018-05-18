@@ -1,21 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  let(:user) { FactoryBot.create(:user)}
-  let(:attendee_one) {FactoryBot.create(:user)}
-  let(:attendee_two) {FactoryBot.create(:user)}
-  let(:event){user.events.create}
+
+  ATTENDEES = 100
+
+  let(:creator) { FactoryBot.create(:user)}
+
+  let(:attendees) do
+    ar = Array.new
+    ATTENDEES.times do
+      ar.push(FactoryBot.create(:user))
+    end
+    ar
+  end
+
+  let(:event){creator.events.create}
 
   describe "associations" do
     it "has a User as creator" do
-      expect(event.creator).to eq(user)
+      expect(event.creator).to eq(creator)
     end
 
     it "has many Users as attendees" do
-      pending "Not implemented"
-      attendee_one.attended_event = event
-      attendee_two.attended_event = event
-      expect(event.attendees).to eq 2
+      attendees.each do |att|
+        event.attendees << att
+      end
+      expect(event.attendees.length).to eq ATTENDEES
     end
   end
 end
