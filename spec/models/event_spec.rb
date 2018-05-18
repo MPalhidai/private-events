@@ -26,6 +26,9 @@ RSpec.describe Event, type: :model do
         event.attendees << att
       end
       expect(event.attendees.length).to eq ATTENDEES
+
+      attendees.each {|att| expect(att.attended_events.first).to eq(event)}
+
     end
   end
 end

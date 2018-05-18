@@ -24,6 +24,9 @@ RSpec.describe User, type: :model do
     it "shows .attended_events" do
       events.each {|event| event.attendees << user }
       expect(user.attended_events.length).to eq EVENTS
+
+      events.each {|e| expect(e.attendees.first).to eq(user)}
+
     end
   end
 
