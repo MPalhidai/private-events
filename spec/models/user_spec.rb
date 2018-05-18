@@ -2,28 +2,28 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  NUMBER_OF_EVENTS = 2
+  EVENTS = 7
 
+  let(:creator) { FactoryBot.create(:user)}
   let(:user) {FactoryBot.create(:user)}
+
   let(:events) do
     e = Array.new
-    NUMBER_OF_EVENTS.times do
-      e.push(FactoryBot.create(:event))
+    EVENTS.times do
+      e.push(creator.events.create)
     end
+    e
   end
 
   describe "Associations" do
     it "can create many events" do
-      first = user.events.create(creator: user, location: "The restaurant at the end of the universe", date: Date.today)
-      second = user.events.create(creator: user, location: "My place", date: Date.today)
-      expect(user.events.length).to be 2
+      EVENTS.times {user.events.create}
+      expect(user.events.length).to be EVENTS
     end
 
-    xit "can attend many events" do
-      pending "How do I even?"
-      events.each do |event|
-        event.attendee.create()
-      end
+    it "shows .attended_events" do
+      events.each {|event| event.attendees << user }
+      expect(user.attended_events.length).to eq EVENTS
     end
   end
 
