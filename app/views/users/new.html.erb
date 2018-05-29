@@ -1,31 +1,35 @@
 <% provide(:title, "Sign up") %>
-<div class="row">
-  <div class="col-sm-4 col-sm-offset-4 well">
+<div class="row justify-content-center align-items-center">
+  <div class="col-sm-4">
     <h2>Sign up</h2>
     <%= form_for(:input, url: users_new_path) do |f| %>
       <div class="field">
         <%= f.label :name %>
         <br/>
         <%= f.text_field :name, autofocus: true, class: "form-control" %>
+        <br/>
       </div>
 
       <div class="field">
         <%= f.label :email %>
         <br/>
         <%= f.email_field :email, class: "form-control" %>
+        <br/>
       </div>
 
-      <!-- <div class="field">
+      <div class="field">
         <%= f.label :password %>
         <br/>
         <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+        <br/>
       </div>
 
       <div class="field">
         <%= f.label :password_confirmation %>
         <br/>
         <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
-      </div> -->
+        <br/>
+      </div>
 
       <div class="actions">
         <%= f.submit "Sign up", class: "form-control btn btn-success" %>
