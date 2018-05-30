@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(name: params[:input][:name].downcase)
-    if user && !user.id.nil?
+    if user
       remember(user)
       current_user
       redirect_to events_path

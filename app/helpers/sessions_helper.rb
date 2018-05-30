@@ -1,16 +1,16 @@
 module SessionsHelper
 
   def remember(user)
-    session[:current_user_id] = user.id
+    cookies.permanent.signed[:current_user_id] = user.id
   end
 
   def current_user
-    @current_user ||= User.find_by(id: session[:current_user_id]) unless session[:current_user_id].nil?
+    @current_user ||= User.find_by(id: cookies.signed[:current_user_id]) unless cookies.signed[:current_user_id].nil?
   end
 
   def log_out
     @current_user = nil
-    session.delete(:current_user_id)
+    cookies.delete(:current_user_id)
   end
 
   def logged_in?

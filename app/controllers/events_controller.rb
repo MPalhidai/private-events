@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
 
+  before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
+
   def index
     #all future events
     Event.all
@@ -11,11 +13,15 @@ class EventsController < ApplicationController
 		@guests = @event.guests
   end
 
+  def new
+    #create new event
+  end
+
   def create
     #create new event
   end
 
-  def destroy
+  def edit
     #create new event
   end
 
@@ -23,7 +29,15 @@ class EventsController < ApplicationController
     #create new event
   end
 
+  def destroy
+    #create new event
+  end
+
   private
+
+  def require_login
+    redirect_to login_path unless logged_in?
+  end
 
   def event_params
 	   params.require(:event).permit(:title, :description, :location, :event_date, :start_time)
