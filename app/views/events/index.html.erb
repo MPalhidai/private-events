@@ -1,0 +1,19 @@
+<% provide(:title, "Future Events") %>
+
+<p> <%= @current_user.name if logged_in? %> </p>
+<br/>
+
+<div class="row justify-content-center text-center">
+	<div class="col-sm-4">
+		<div class="btn-group btn-group-justified">
+			<%= link_to "Past Events", user_events_path(:past => true), class: "btn btn-info btn-sm" %>
+			<%= link_to "My Events", user_events_path(:host => true), class: "btn btn-info btn-sm" %>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+		<%= @events %>
+	</div>
+</div>
