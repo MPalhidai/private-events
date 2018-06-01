@@ -1,11 +1,12 @@
 <nav class="navbar navbar-dark bg-dark">
-  <div class="row justify-content-between w-100">
+  <div class="row justify-content-between w-100 m-0">
     <div class="col-sm-4">
       <a class="navbar-brand" href="#">Events.io</a>
     </div>
     <div class="col-sm-4 text-right">
       <% if logged_in? %>
-        <p class="text-white d-inline"> <%= @current_user.name %> </p>
+        <p class="text-white d-inline"> <%= current_user.name %> </p>
+        <%= link_to "Create event", new_event_path, :class => "btn btn-outline-primary" %>
         <%= link_to "Log out", logout_path, :method => "delete", :class => "btn btn-outline-primary" %>
       <% else %>
         <%= link_to "Log in", login_path, :class => "btn btn-outline-primary" %>

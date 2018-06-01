@@ -4,21 +4,29 @@ class EventsController < ApplicationController
 
   def index
     #all future events
-    Event.all
+
+    #NOT SHOWING ALL EVENTS
+    #Showing only current users events
+    @events = Event.all
   end
 
   def show
     #one event
-    @event = Event.find(params[:id])
-		@guests = @event.guests
+    # @event = Event.find(params[:id])
+		# @guests = @event.guests
   end
 
   def new
-    #create new event
+    @event = Event.new
   end
 
   def create
-    #create new event
+    @event = current_user.events.build(event_params)
+    if @event.save
+      redirect_to user_events_path
+    else
+      render :new
+    end
   end
 
   def edit
@@ -35,11 +43,8 @@ class EventsController < ApplicationController
 
   private
 
-  def require_login
-    redirect_to login_path unless logged_in?
-  end
-
   def event_params
-	   params.require(:event).permit(:title, :description, :location, :event_date, :start_time)
+    params.require(:event).permit(:description, :location, :date)
+    #.permit(:title, :description, :location, :event_date, :start_time)
   end
 end

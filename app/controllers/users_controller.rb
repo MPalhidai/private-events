@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+    before_action :require_login, only: [:show, :edit, :update, :destroy]
+
   def new
     @user = User.new
   end
@@ -13,6 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @events = @current_user.events.order("date DESC")
   end
 
   def edit
