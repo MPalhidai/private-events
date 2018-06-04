@@ -15,6 +15,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
-    redirect_to request.referrer
+    redirect_to events_path
   end
 end

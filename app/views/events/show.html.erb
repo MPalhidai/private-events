@@ -1,2 +1,18 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<% provide(:title, )#@event.title) %>
+<div class="row justify-content-center">
+	<div class="col-sm-6">
+    <section class="event border border-info rounded p-1 m-3">
+  		<div class="event-heading p-3">
+  			<h4><%#= @event.title.capitalize %>Title</h4>
+        <hr>
+  		</div>
+    	<div class="event-content p-3">
+    		<p><%= @event.description %></p>
+    		<p class="creator">By <%= @event.creator.name %></p>
+        <i class="icon fa fa-map-marker mr-3"></i><span><%= @event.location %></span>
+        <br>
+    		<i class="icon fa fa-calendar-o mr-3"></i><span><%= "#{@event.date} at {(event.start_time).strftime('%r')}"%> </span>
+    	</div>
+  	</section>
+	</div>
+</div>

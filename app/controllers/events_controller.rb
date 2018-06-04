@@ -3,17 +3,12 @@ class EventsController < ApplicationController
   before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    #all future events
-
-    #NOT SHOWING ALL EVENTS
-    #Showing only current users events
     @events = Event.all
   end
 
   def show
-    #one event
-    # @event = Event.find(params[:id])
-		# @guests = @event.guests
+    event
+    @attendees = @event.attendees
   end
 
   def new
@@ -30,21 +25,30 @@ class EventsController < ApplicationController
   end
 
   def edit
-    #create new event
+    event
   end
 
   def update
-    #create new event
+    if @event.update_attributes(event_params)
+			redirect_to @event
+		else
+			render 'edit'
+		end
   end
 
   def destroy
-    #create new event
+		event.destroy
+    redirect_to events_path
   end
 
   private
 
   def event_params
     params.require(:event).permit(:description, :location, :date)
-    #.permit(:title, :description, :location, :event_date, :start_time)
+    #.permit(:title, :description, :location, :date, :start_time)
+  end
+
+  def event
+    @event ||= Event.find(params[:id])
   end
 end

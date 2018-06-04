@@ -8,13 +8,13 @@
 	</a>
 	<div class="event-content p-3">
 		<p><%= event.description %></p>
-		<p class="creator">By <%=event.creator.name %></p>
+		<p class="creator">By <%= event.creator.name %></p>
 			<ul style="list-style-type:none;">
 				<li>
-					<i class="icon fa fa-map-marker"></i><span><%= event.location %></span>
+					<i class="icon fa fa-map-marker mr-3"></i><span><%= event.location %></span>
 				</li>
 				<li>
-					<i class="icon fa fa-calendar-o"></i><span><%= "#{(event.date).strftime('%v')} at {(event.start_time).strftime('%r')}"%> </span>
+					<i class="icon fa fa-calendar-o mr-3"></i><span><%= "#{event.date} at {(event.start_time).strftime('%r')}"%> </span>
 				</li>
 			</ul>
 	</div>
