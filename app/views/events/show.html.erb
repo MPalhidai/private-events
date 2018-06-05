@@ -8,12 +8,13 @@
         </div>
         <div class="col">
           <h4>
-          <% if current_user # && not in appointments %>
-            <%= form_for(current_user.appointments.build(attended_event_id: @event.id)) do |f| %>
-              <%= f.hidden_field :attended_event_id, :value => @event.id %>
+          <% if current_user && !current_user.appointments.include?(current_user.id) %>
+            <%= form_for current_user.appointments.build do |f| %>
+              <%#= f.hidden_field :attendee, value: current_user.id %>
+              <%= f.hidden_field :attended_event_id, value: @event.id %>
               <%= f.submit "Attend Event", class: "form-control btn btn-outline-primary" %>
             <% end %>
-          <% else # change to else if in current_user.appointments%>
+          <% else current_user.appointments.include?(current_user.id) %>
             <%= form_for(current_user.appointments.find_by(attended_event_id: @event.id), :html => { method: :delete }) do |f| %>
   						<%= f.submit "Can't make it", class: "form-control btn btn-danger" %>
   					<% end %>
@@ -34,8 +35,10 @@
       <h3 class="attending-head"><i class="fa fa-list mr-3"></i>Attendees</h3>
       <hr>
   		<% @attendees.each do |attendee| %>
-  			<ul class="guest-list">
-  				<i class="fa fa-user mr-3"><li><span><%= attendee.name %></li></span>
+  			<ul class="guest-list" style="list-style:none">
+  				<li>
+            <i class="fa fa-user mr-3"></i><span><%= attendee.name %></span>
+          </li>
   			</ul>
   		<% end %>
 	  </section>
