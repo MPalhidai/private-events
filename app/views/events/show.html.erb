@@ -2,17 +2,42 @@
 <div class="row justify-content-center">
 	<div class="col-sm-6">
     <section class="event border border-info rounded p-1 m-3">
-  		<div class="event-heading p-3">
-  			<h4><%#= @event.title.capitalize %>Title</h4>
-        <hr>
+  		<div class="row justify-content-between align-items-center p-3 border-bottom">
+        <div class="col">
+          <h4><%= @event.title.capitalize %></h4>
+        </div>
+        <div class="col">
+          <h4>
+          <% if current_user # && not in appointments %>
+            <%= form_for(current_user.appointments.build(attended_event_id: @event.id)) do |f| %>
+              <%= f.hidden_field :attended_event_id, :value => @event.id %>
+              <%= f.submit "Attend Event", class: "form-control btn btn-outline-primary" %>
+            <% end %>
+          <% else # change to else if in current_user.appointments%>
+            <%= form_for(current_user.appointments.find_by(attended_event_id: @event.id), :html => { method: :delete }) do |f| %>
+  						<%= f.submit "Can't make it", class: "form-control btn btn-danger" %>
+  					<% end %>
+          <% end %>
+          </h4>
+        </div>
   		</div>
-    	<div class="event-content p-3">
+    	<div class="event-content p-3 m-3">
     		<p><%= @event.description %></p>
-    		<p class="creator">By <%= @event.creator.name %></p>
-        <i class="icon fa fa-map-marker mr-3"></i><span><%= @event.location %></span>
+    		<p class="creator">Hosted by <%= @event.creator.name %></p>
+        <i class="fa fa-map-marker mr-3"></i><span><%= @event.location %></span>
         <br>
-    		<i class="icon fa fa-calendar-o mr-3"></i><span><%= "#{@event.date} at {(event.start_time).strftime('%r')}"%> </span>
+    		<i class="fa fa-calendar-o mr-3"></i><span><%= "#{format_date(@event.date)} at #{format_time(@event.time)}"%> </span>
     	</div>
   	</section>
+
+    <section class="event p-1 m-3">
+      <h3 class="attending-head"><i class="fa fa-list mr-3"></i>Attendees</h3>
+      <hr>
+  		<% @attendees.each do |attendee| %>
+  			<ul class="guest-list">
+  				<i class="fa fa-user mr-3"><li><span><%= attendee.name %></li></span>
+  			</ul>
+  		<% end %>
+	  </section>
 	</div>
 </div>

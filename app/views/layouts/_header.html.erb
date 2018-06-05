@@ -3,9 +3,10 @@
     <div class="col-sm-4">
       <a class="navbar-brand" href="#">Events.io</a>
     </div>
-    <div class="col-sm-4 text-right">
+    <div class="col-sm-6 text-right">
+      <span class="text-white d-inline"> <%= current_user.name if logged_in? %> </span>
+      <%= link_to "Events", events_path, :class => "btn btn-outline-primary" %>
       <% if logged_in? %>
-        <p class="text-white d-inline"> <%= current_user.name %> </p>
         <%= link_to "Create event", new_event_path, :class => "btn btn-outline-primary" %>
         <%= link_to "Log out", logout_path, :method => "delete", :class => "btn btn-outline-primary" %>
       <% else %>

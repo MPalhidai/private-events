@@ -1,22 +1,20 @@
 <% @events.each do |event| %>
 	<a href="<%= event_path(event.id)%>">
 	<section class="event border border-info rounded p-1 m-3">
-		<div class="event-heading p-3">
-			<h4><%#= event.title.capitalize %>Title</h4>
-      <hr>
+    <div class="row justify-content-between align-items-center p-3 border-bottom">
+      <div class="col">
+        <h4><%= event.title %></h4>
+      </div>
 		</div>
 	</a>
-	<div class="event-content p-3">
-		<p><%= event.description %></p>
-		<p class="creator">By <%= event.creator.name %></p>
-			<ul style="list-style-type:none;">
-				<li>
-					<i class="icon fa fa-map-marker mr-3"></i><span><%= event.location %></span>
-				</li>
-				<li>
-					<i class="icon fa fa-calendar-o mr-3"></i><span><%= "#{event.date} at {(event.start_time).strftime('%r')}"%> </span>
-				</li>
-			</ul>
+	<div class="row p-3 m-3">
+    <div class="col">
+  		<p><%= event.description %></p>
+  		<p class="creator">Hosted by <%= event.creator.name %></p>
+			<i class="fa fa-map-marker mr-3"></i><span><%= event.location %></span>
+      <br>
+			<i class="fa fa-calendar-o mr-3"></i><span><%= "#{event.date} at #{event.time}"%> </span>
+    </div>
 	</div>
 	</section>
 <% end %>
