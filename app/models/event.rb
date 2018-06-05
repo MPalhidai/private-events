@@ -3,6 +3,9 @@ class Event < ApplicationRecord
   has_many :appointments, :foreign_key => 'attended_event_id', dependent: :destroy
   has_many :attendees, :through => :appointments, dependent: :destroy
 
+  scope :future, -> { where("date >= ?", Date.today).order("date ASC") }
+	scope :past, -> { where("date < ?", Date.today).order("date DESC") }
+
   validates :title, presence: true, length: { minimum: 2, maximum: 64 }
   validates :description, length: { maximum: 256 }
   validates :location, presence: true, length: { minimum: 2, maximum: 128}

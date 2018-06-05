@@ -3,7 +3,13 @@ class EventsController < ApplicationController
   before_action :require_login, only: [:new, :create, :show, :edit, :update, :destroy]
 
   def index
-    @events = Event.all
+    if request.fullpath.include?('future=true')
+      @events = Event.future.all
+    elsif request.fullpath.include?('past=true')
+			@events = Event.past.all
+		else
+			@events = Event.order("date DESC")
+		end
   end
 
   def show
