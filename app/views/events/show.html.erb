@@ -7,7 +7,7 @@
           <h4 class="m-0"><%= @event.title.capitalize %></h4>
         </div>
         <div class="col-sm-4">
-          <% if @event.appointments.include?(current_user)  %>
+          <% if current_user.appointments.find_by(attended_event_id: @event.id) %>
 						<%= form_for(current_user.appointments.find_by(attended_event_id: @event.id), :html => { method: :delete }) do |f| %>
 							<%= f.submit "Can't make it", class: "form-control btn btn-danger" %>
 						<% end %>
