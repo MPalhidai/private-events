@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
+  before_action :require_login, only: [:new, :create, :show, :edit, :update, :destroy]
 
   def index
     @events = Event.all
@@ -29,6 +29,7 @@ class EventsController < ApplicationController
   end
 
   def update
+    event
     if @event.update_attributes(event_params)
 			redirect_to @event
 		else
