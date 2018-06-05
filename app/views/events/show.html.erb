@@ -8,8 +8,8 @@
         </div>
         <div class="col-sm-4">
           <% if current_user && !current_user.appointments.include?(current_user.id) %>
-            <%= form_for current_user.appointments.build(attended_event_id: @event.id) do |f| %>
-              <%#= f.hidden_field :attendee, value: current_user.id %>
+            <%= form_for :appointment, url: appointments_path do |f| %>
+              <%= f.hidden_field :attendee_id, value: current_user.id %>
               <%= f.hidden_field :attended_event_id, value: @event.id %>
               <%= f.submit "Attend Event", class: "form-control btn btn-outline-primary" %>
             <% end %>
