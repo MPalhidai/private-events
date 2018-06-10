@@ -10,9 +10,9 @@ class AppointmentsController < ApplicationController
   end
 
   def destroy
-  	@appointment = Appointment.find(params[:id])
-  	current_user.appointments.destroy(@appointment)
-  	redirect_to request.referrer
+    @appointment = Appointment.find(params[:id])
+    current_user.appointments.destroy(@appointment)
+    redirect_to request.referrer
   end
 
   private
