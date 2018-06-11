@@ -2,21 +2,6 @@ class EventsController < ApplicationController
 
   before_action :require_login, only: [:new, :create, :show, :edit, :update, :destroy]
 
-  def index
-    if request.fullpath.include?('future=true')
-      @events = Event.future
-    elsif request.fullpath.include?('past=true')
-      @events = Event.past
-    else
-      @events = Event.order("date DESC")
-    end
-  end
-
-  def show
-    event
-    @attendees = @event.attendees
-  end
-
   def new
     @event = Event.new
   end
@@ -27,6 +12,21 @@ class EventsController < ApplicationController
       redirect_to user_events_path
     else
       render :new
+    end
+  end
+
+  def show
+    event
+    @attendees = @event.attendees
+  end
+
+  def index
+    if request.fullpath.include?('future=true')
+      @events = Event.future
+    elsif request.fullpath.include?('past=true')
+      @events = Event.past
+    else
+      @events = Event.order("date DESC")
     end
   end
 

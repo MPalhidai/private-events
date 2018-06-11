@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/user_events', to: 'users#show'
-  resources :users
-  resources :events
-  get 'appointments/create'
-  resources :appointments, only: [:create, :destroy]
+  resources :users, except: [:index]
+  resources :events do
+    resources :appointments, only: [:create, :destroy]
+  end
 end
