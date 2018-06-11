@@ -4,12 +4,12 @@ class EventsController < ApplicationController
 
   def index
     if request.fullpath.include?('future=true')
-      @events = Event.future.all
+      @events = Event.future
     elsif request.fullpath.include?('past=true')
-			@events = Event.past.all
-		else
-			@events = Event.order("date DESC")
-		end
+      @events = Event.past
+    else
+      @events = Event.order("date DESC")
+    end
   end
 
   def show

@@ -17,9 +17,9 @@ class UsersController < ApplicationController
 
   def show
     if request.fullpath.include?('future=true')
-      @events = @current_user.events.future.all
+      @events = @current_user.events.future
     elsif request.fullpath.include?('past=true')
-			@events = @current_user.events.past.all
+			@events = @current_user.events.past
 		else
 			@events = @current_user.events.order("date DESC")
 		end
