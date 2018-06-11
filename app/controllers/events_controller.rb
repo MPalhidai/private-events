@@ -36,10 +36,10 @@ class EventsController < ApplicationController
 
   def update
     if event.update_attributes(event_params)
-			redirect_to @event
-		else
-			render :edit
-		end
+      redirect_to @event
+    else
+      render :edit
+    end
   end
 
   def destroy

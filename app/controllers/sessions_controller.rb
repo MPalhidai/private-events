@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     user = User.find_by(name: params[:input][:name].downcase)
     if user
       remember(user)
-      current_user
       redirect_to events_path
     else
       render :new
