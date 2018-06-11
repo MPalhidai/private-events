@@ -35,11 +35,10 @@ class EventsController < ApplicationController
   end
 
   def update
-    event
-    if @event.update_attributes(event_params)
+    if event.update_attributes(event_params)
 			redirect_to @event
 		else
-			render 'edit'
+			render :edit
 		end
   end
 
