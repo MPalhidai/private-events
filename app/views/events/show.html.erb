@@ -6,8 +6,10 @@
         <div class="col-sm-8">
           <h4 class="m-0"><%= @event.title.capitalize %></h4>
         </div>
-        <div class="col-sm-4">
-          <% if current_user.appointments.find_by(attended_event_id: @event.id) %>
+        <div class="col-sm-4 text-right">
+					<% if current_user.id == @event.user_id %>
+						<%= link_to "Edit Event", edit_event_path, class: "btn btn-outline-success" %>
+          <% elsif current_user.appointments.find_by(attended_event_id: @event.id) %>
 						<%= form_for(current_user.appointments.find_by(attended_event_id: @event.id), :html => { method: :delete }) do |f| %>
 							<%= f.submit "Can't make it", class: "form-control btn btn-danger" %>
 						<% end %>

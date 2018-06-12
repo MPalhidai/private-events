@@ -1,7 +1,7 @@
-<% provide(:title, "Create An Event") %>
+<% provide(:title, "Edit Event") %>
 <div class="row justify-content-center align-items-center p-5">
   <div class="col-sm-6">
-    <h1>Create an event</h1>
+    <h1>Edit your event</h1>
     <%= form_for @event do |f| %>
 
       <div class="field">
@@ -40,7 +40,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "Create Event", class: "form-control btn btn-success" %>
+        <%= f.submit "Save Changes", class: "form-control btn btn-success" %>
       </div>
 
     <% end %>
