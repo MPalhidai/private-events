@@ -12,11 +12,13 @@
             <i class="fa fa-user"> <%= current_user.name.capitalize %></i>
           </button>
           <div class="dropdown-menu dropdown-menu-right text-center">
-            <a class="dropdown-item"><%= link_to "Home", root_path %></a>
-            <a class="dropdown-item"><%= link_to "Account", root_path %></a>
-            <a class="dropdown-item"><%= link_to "My Events", user_events_path %></a>
+            <%= link_to "Home", root_path %>
+            <br/>
+            <%= link_to "Account", root_path %>
+            <br/>
+            <%= link_to "My Events", user_events_path %>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item"><%= link_to "Log Out", logout_path, :method => "delete" %></a>
+            <%= link_to "Log Out", logout_path, :method => "delete" %>
           </div>
         </div>
       <% else %>
